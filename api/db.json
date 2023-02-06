@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "email": "kamran@gmail.com",
+      "password": "123456",
+      "role": "admin",
+      "status": 1,
+      "id": 1
+    },
+    {
+      "email": "anar@gmail.com",
+      "password": "123456",
+      "role": "user",
+      "status": 1,
+      "id": 2
+    },
+    {
+      "email": "ehmedMuradli@gmail.com",
+      "password": "123456",
+      "role": "admin",
+      "status": 1,
+      "id": 3
+    }
+  ],
+  "usersDetails": [
+    {
+      "name": "Kamran",
+      "surname": "Mammadov",
+      "age": 25,
+      "email": "kamran@gmail.com",
+      "number": "**********",
+      "qualification": "Junior Developer",
+      "id": 1
+    },
+    {
+      "name": "Anar",
+      "surname": "Bakirov",
+      "age": 30,
+      "email": "anarBakirov@gmail.com",
+      "number": "**********",
+      "qualification": "Backend Developer",
+      "id": 2
+    },
+    {
+      "name": "Ehmed",
+      "surname": "Muradli",
+      "age": "**",
+      "email": "ehmedMuradli@gmail.com",
+      "number": "**********",
+      "qualification": "Director",
+      "id": 3
+    }
+  ]
+}

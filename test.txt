@@ -1,0 +1,221 @@
+alertify, signup,Home
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+import React, { useState, useEffect } from "react";
+import style from "../SignIn/signIn.module.css";
+import logo from "../../images/logo.gif";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+
+const Home = () => {
+  const [data, setData] = useState([]);
+  const [storage, setStorage] = useState("");
+
+  useEffect(() => {
+    //! get data from local storage
+    const storage = JSON.parse(localStorage.getItem("user"));
+    setStorage(storage);
+    console.log("====================================storage", storage);
+
+    //! fetch data from server
+    fetch("http://localhost:3000/usersDetails")
+      .then((response) => response.json())
+      .then((respone2) => setData(respone2));
+  }, []);
+
+  console.log(data);
+  console.log(storage);
+
+
+
+  return (
+    <div className="container">
+      <div className="signInContainer">
+        <div className={style.signIn_top}>
+          <img src={logo} className={style.logo} alt="AzərEnerji loqosu" />
+          <h1>Information</h1>
+        </div>
+
+        <div className={style.signIn_main}>
+          {data.map((item) => {
+              console.log('====================================');
+              console.log(item,"eeeeeeeee");
+              console.log('====================================');
+            if (item.email === storage.email) {
+            
+              return (
+                <Form
+                  className={style.signIn_form}
+                  //! onSubmit={handleSubmit}
+                  key={item.id}
+                >
+                  <FormGroup>
+                    <Label for="forName">Name</Label>
+                    <input
+                      type="text"
+                      placeholder="name"
+                      value={item.name}
+                       
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="forSurname">Surname</Label>
+                    <input
+                      type="text"
+                      placeholder="surname"
+                      value={item.surname }
+                      //! onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="forAge">Age</Label>
+                    <input
+                      type="number"
+                      placeholder="age"
+                      value={item.age}
+                      //! onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <Label for="forQualification">Qualification</Label>
+                    <input
+                      type="text"
+                      placeholder="qualification"
+                      value={item.qualification}
+                      //! onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </FormGroup>
+                  <FormGroup>
+                    <Label for="forEmail">Email</Label>
+                    <Input
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      value={item.email}
+                      //! onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </FormGroup>
+
+                  <button type="submit">Change</button>
+                </Form>
+              );
+            }
+          })}
+        </div>
+
+        <div className={style.signIn_bottom}>
+          <Link to="/signin">Do you want change your password?</Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Home;
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+import React, { useState, useEffect } from "react";
+import style from "../SignIn/signIn.module.css";
+import logo from "../../images/logo.gif";
+import profileImg from "../../images/profileImg.png";
+import { useNavigate } from "react-router-dom";
+
+const Home = () => {
+  const [data, setData] = useState([]);
+  const [storage, setStorage] = useState("");
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    //! get data from local storage
+    const storage = JSON.parse(localStorage.getItem("user"));
+    setStorage(storage);
+    console.log("====================================storage", storage);
+
+    //! fetch data from server
+    fetch("http://localhost:3000/usersDetails")
+      .then((response) => response.json())
+      .then((respone2) => setData(respone2));
+  }, []);
+
+  const handleLogOut = (e) => {
+    localStorage.removeItem("user");
+    navigate("/signin");
+    e.preventDefault();
+  };
+
+  console.log(data);
+  console.log(storage);
+
+  return (
+    <div className="container">
+      <div className="signInContainer">
+        <div className={style.signIn_top}>
+          <img src={logo} className={style.logo} alt="AzərEnerji loqosu" />
+          <h1>Information</h1>
+        </div>
+
+        <div className={`${style.signIn_main} ${style.mainHome}`}>
+          {data.map((item) => {
+            console.log("====================================");
+            console.log(item, "eeeeeeeee");
+            console.log("====================================");
+            if (item.email === storage.email) {
+              return (
+                <div className={style.home_information}>
+                  <div>
+                    <img src={profileImg} alt="my profile img" />
+                  </div>
+                  <div>
+                    <p>Name:</p>
+                    <p>{item.name}</p>
+                  </div>
+                  <div>
+                    <p>Surname:</p>
+                    <p>{item.surname}</p>
+                  </div>
+                  <div>
+                    <p>Age:</p>
+                    <p> {item.age}</p>
+                  </div>
+                  <div>
+                    <p>Email:</p>
+                    <p> {item.email}</p>
+                  </div>
+                  <div>
+                    <p>Number:</p>
+                    <p> {item.number}</p>
+                  </div>
+                  <div>
+                    <p>Qualification:</p>
+                    <p>{item.qualification}</p>
+                  </div>
+                  <button className={style.main_Button} type="submit" onClick={(e) => handleLogOut()}>
+                  Log out
+                  </button>
+                </div>
+              );
+            }
+          })}
+        </div>
+
+
+      </div>
+    </div>
+  );
+};
+
+export default Home;

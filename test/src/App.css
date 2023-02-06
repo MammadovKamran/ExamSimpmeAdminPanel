@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.signInContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 30%;
+  height: 90%;
+  background: rgb(120, 120, 245);
+  background: linear-gradient(rgba(120, 120, 245, 1) 0%, rgba(165, 58, 229, 1) 100%);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.aaa {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+#root{
+  height: 100vh;
+  width: 100vw;
+}
